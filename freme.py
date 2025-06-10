@@ -26,6 +26,7 @@ frame_eletronicos.pack(pady=20, fill="x", expand=True)
 # Este frame será marrom claro e também terá um espaçamento interno.
 frame_livros = tk.Frame(root, bg="tan", padx=10, pady=10)
 
+
 # 6. Coloca alguns "produtos" (Labels) dentro do frame de livros
 label_romance = tk.Label(frame_livros, text="Livro de Romance", bg="tan")
 label_romance.pack(pady=5)

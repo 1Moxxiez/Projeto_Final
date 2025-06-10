@@ -14,6 +14,7 @@ def definir_mesa_principal(mesa):
     global _mesa_de_trabalho_principal
     _mesa_de_trabalho_principal = mesa
     print("DEBUG: Mesa de trabalho principal definida.")
+    
 
 def show_in_new_window(title, content):
     """
@@ -25,6 +26,7 @@ def show_in_new_window(title, content):
     if _mesa_de_trabalho_principal is None:
         print("ERRO: A mesa de trabalho principal não foi definida. Não consigo criar a janela!")
         return
+
 
     # 1. tk.Toplevel(_mesa_de_trabalho_principal):
     #    Cria a "folha de papel separada". O (_mesa_de_trabalho_principal)
