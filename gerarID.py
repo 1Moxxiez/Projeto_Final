@@ -30,6 +30,7 @@ def set_initial_participant_id_counter():
                 # Se eu encontrar um crachá "malfeito" (tipo "ABC" ou "P-XYZ"), eu ignoro.
                 pass
 
+
         # Depois de olhar todos os crachás...
         # "O maior número de crachá que encontrei foi 6. Então, o próximo crachá que eu posso entregar
         # tem que ser o 6 + 1 = 7."

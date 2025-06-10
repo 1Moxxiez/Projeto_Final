@@ -19,6 +19,7 @@ def instalar_janelinha_extra(titulo):
     """
     Esta função tenta instalar uma janelinha extra (pop-up).
     Para fazer isso, ela PRECISA saber qual é a porta principal da casa.
+    
     """
     if _minha_porta_principal is None:
         print("ERRO: Não consigo instalar a janelinha! Ninguém me disse qual é a porta principal da casa!")
