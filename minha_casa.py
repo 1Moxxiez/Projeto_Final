@@ -19,7 +19,6 @@ def instalar_janelinha_extra(titulo):
     """
     Esta função tenta instalar uma janelinha extra (pop-up).
     Para fazer isso, ela PRECISA saber qual é a porta principal da casa.
-    
     """
     if _minha_porta_principal is None:
         print("ERRO: Não consigo instalar a janelinha! Ninguém me disse qual é a porta principal da casa!")
@@ -28,5 +27,5 @@ def instalar_janelinha_extra(titulo):
     # Se a porta principal foi registrada, podemos instalar a janelinha nela
     janelinha = tk.Toplevel(_minha_porta_principal) # A janelinha é "filha" da porta principal
     janelinha.title(titulo)
-    tk.Label(janelinha, text=f"Sou a {titulo}, instalada na sua casa!").pack(10)
+    tk.Label(janelinha, text=f"Sou a {titulo}, instalada na sua casa!").pack()
     print(f"DEBUG: Janelinha '{titulo}' instalada com sucesso.")
