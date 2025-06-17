@@ -165,6 +165,40 @@ tk.Button(button_frame, text="Buscar Participante por ID", command=...,
 
 
 
+# -----------------------------------------------------------------
+# 5. Barra de Menu Superior (Menubar)
+# -----------------------------------------------------------------
+
+# Cria a barra de menu que aparece no topo da janela.
+menubar = tk.Menu(root)
+root.config(menu=menubar) # Associa a barra de menu à janela principal
+
+# Menu "Arquivo"
+file_menu = tk.Menu(menubar, tearoff=0) # `tearoff=0` impede que o menu seja "arrancado" da barra
+menubar.add_cascade(label="Arquivo", menu=file_menu) # Adiciona o menu "Arquivo" à barra de menu
+# Adiciona itens ao menu "Arquivo"
+
+file_menu.add_command(label="Importar Dados (Exemplo)", command=...)
+file_menu.add_separator() # Adiciona uma linha separadora
+file_menu.add_command(label="Sair", command=root.quit) # `root.quit` fecha a aplicação
+
+# Menu "Eventos"
+event_menu = tk.Menu(menubar, tearoff=0)
+menubar.add_cascade(label="Eventos", menu=event_menu)
+event_menu.add_command(label="Exibir Todos os Eventos", command=...)
+event_menu.add_command(label="Adicionar Novo Evento", command=...)
+event_menu.add_command(label="Remover Evento", command=...)
+event_menu.add_command(label="Atualizar Informações do Evento", command=...)
+event_menu.add_separator()
+event_menu.add_command(label="Identificar Eventos com Poucos Participantes", command=...)
+event_menu.add_command(label="Agrupar Eventos por Tema", command=...) # Funções de relatório aqui
+event_menu.add_command(label="Contar Eventos por Tema", command=...)
+
+
+# -----------------------------------------------------------------
+# 6. Iniciar o Loop Principal da Aplicação
+# -----------------------------------------------------------------
+
 # `root.mainloop()`: Esta linha é a mais importante para iniciar a GUI.
 # Ela inicia o "loop de eventos" do Tkinter. A aplicação fica rodando,
 # esperando por interações do usuário (cliques em botões, digitação, etc.).
