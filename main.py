@@ -173,6 +173,9 @@ tk.Button(button_frame, text="Buscar Participante por ID", command=...,
 menubar = tk.Menu(root)
 root.config(menu=menubar) # Associa a barra de menu à janela principal
 
+
+
+
 # Menu "Arquivo"
 file_menu = tk.Menu(menubar, tearoff=0) # `tearoff=0` impede que o menu seja "arrancado" da barra
 menubar.add_cascade(label="Arquivo", menu=file_menu) # Adiciona o menu "Arquivo" à barra de menu
@@ -185,6 +188,7 @@ file_menu.add_command(label="Sair", command=root.quit) # `root.quit` fecha a apl
 # Menu "Eventos"
 event_menu = tk.Menu(menubar, tearoff=0)
 menubar.add_cascade(label="Eventos", menu=event_menu)
+
 event_menu.add_command(label="Exibir Todos os Eventos", command=...)
 event_menu.add_command(label="Adicionar Novo Evento", command=...)
 event_menu.add_command(label="Remover Evento", command=...)
@@ -193,6 +197,34 @@ event_menu.add_separator()
 event_menu.add_command(label="Identificar Eventos com Poucos Participantes", command=...)
 event_menu.add_command(label="Agrupar Eventos por Tema", command=...) # Funções de relatório aqui
 event_menu.add_command(label="Contar Eventos por Tema", command=...)
+
+# Menu 'Participantes'
+participant_menu = tk.Menu(menubar, tearoff=0)
+menubar.add_cascade(label='Participantes', menu=participant_menu)
+
+participant_menu.add_command(label="Cadastrar Novo Participante (ID Automático)", command=...)
+participant_menu.add_command(label="Listar Todos os Participantes (Ordenado por ID)", command=...)
+participant_menu.add_command(label="Listar Participantes por Evento", command=...)
+participant_menu.add_command(label="Buscar Participante por ID", command=...)
+participant_menu.add_command(label="Inscrever Participante em Evento", command=...)
+participant_menu.add_command(label="Remover Participante de Evento", command=...)
+participant_menu.add_command(label="Remover Participante Completamente do Sistema", command=...)
+participant_menu.add_command(label="Atualizar Informações do Participante", command=...)
+participant_menu.add_separator()
+participant_menu.add_command(label="Detectar e Remover Duplicatas em Eventos", command=...)
+participant_menu.add_command(label="Listar Eventos por Participante", command=...)
+
+
+# Menu "Relatórios e Estatísticas"
+reports_menu = tk.Menu(menubar, tearoff=0)
+menubar.add_cascade(label="Relatórios e Estatísticas", menu=reports_menu)
+reports_menu.add_command(label="Gerar Estatísticas Gerais", command=...)
+reports_menu.add_command(label="Calcular Taxa Média de Participação por Tema", command=...)
+
+# Menu "Busca"
+search_menu = tk.Menu(menubar, tearoff=0)
+menubar.add_cascade(label="Busca", menu=search_menu)
+search_menu.add_command(label="Busca Filtrada (Tema/Data)", command=...)
 
 
 # -----------------------------------------------------------------
