@@ -59,14 +59,8 @@ na janela.
 `expand=True : faz o frame expandir com a janela
 `fill="both" : o faz preencher tanto na horizontal quanto na vertical.
 '''
-main_frame = tk.Frame(root, padx=20, pady=20, bg="lightgray") # Adiciona padding interno ao frame
+main_frame = tk.Frame(root, padx=20, pady=20) # Adiciona padding interno ao frame
 main_frame.pack(expand=True, fill='both')
-
-# `root.mainloop()`: Esta linha é a mais importante para iniciar a GUI.
-# Ela inicia o "loop de eventos" do Tkinter. A aplicação fica rodando,
-# esperando por interações do usuário (cliques em botões, digitação, etc.).
-# Sem esta linha, a janela Tkinter apareceria e fecharia imediatamente.
-root.mainloop()
 
 
 
@@ -74,3 +68,105 @@ root.mainloop()
 # -----------------------------------------------------------------
 # 3. Títulos e Descrição na Janela Principal
 # -----------------------------------------------------------------
+
+'''
+ `Label` é um widget para exibir texto ou imagens.
+ Coloca alguns "itens" (Labels) dentro do main_frame
+ 
+ \n é um caractere de quebra de linha
+ wraplength: define a largura máxima em pixels antes que o texto seja automaticamente quebrado para a próxima linha
+
+'''
+
+title_label = tk.Label(main_frame, text='Gerenciamento de Eventos',
+                       font=('Arial', 28, 'bold'), fg= "#000000")
+                                           #bold = negrito, tipo de letra maior 
+                                        
+ # `pady` adiciona espaçamento vertical abaixo do label.
+title_label.pack(padx=(10, 20)) #terá 10 pixels de espaço acima dele e 20 pixels de espaço abaixo dele  
+
+description_label = tk.Label(main_frame,  
+                             text="Bem-vindo ao Sistema de Gerenciamento de Eventos da Comunidade Tech.\n"
+                                  "Use os botões abaixo ou o menu superior para interagir com o sistema.",
+                                  font=("Arial", 14), wraplength=800, justify=tk.CENTER, fg="#000000")  
+
+
+description_label.pack(pady=10)
+
+
+
+
+
+# -----------------------------------------------------------------
+# 4. Botões de Ações Comuns na Janela Principal
+# -----------------------------------------------------------------
+
+'''
+
+Criando botões para as funcionalidades mais acessadas.
+ `tk.Button(...)` cria um botão.
+ `text`: O texto exibido no botão.
+ `command`: A função Python que será chamada quando o botão for clicado.
+            É importante não colocar parênteses na função (ex: `adicionar()` está errado, `adicionar` é o certo),
+            porque queremos passar a referência da função, não o resultado de sua execução.
+ `font`: Define a fonte e tamanho do texto do botão.
+ `width`, `height`: Define o tamanho do botão em unidades de texto.
+ `bg`, `fg`: Cor de fundo e cor do texto (background/foreground).
+ `activebackground`: Cor de fundo quando o botão está sendo clicado.
+ `grid()`: É outro gerenciador de layout. Ele organiza os widgets em uma grade (linhas e colunas).
+           - `row`: A linha na grade.
+           - `column`: A coluna na grade.
+           - `padx`, `pady`: Espaçamento externo horizontal e vertical entre os botões.
+
+
+'''
+
+# Outro Frame para agrupar os botões, melhorando a organização do layout.
+button_frame = tk.Frame(main_frame, pady=20, bg="#BABFC5")
+button_frame.pack()
+
+
+
+# Botões de Eventos
+description_button = tk.Label(button_frame,text='Eventos',
+                       font=('Arial', 12, 'bold'), fg= "#000000", bg="#BABFC5").grid(row=0, column=0, )
+
+tk.Button(button_frame, text='Adicionar Evento', command= ..., 
+          font=('Arial', 12), width=25, height=2, bg="#6C0D95", fg="white", activebackground='#8613B7').grid(row=2, column=0, padx=10, pady=2)
+tk.Button(button_frame, text="Exibir Eventos", command=..., 
+          font=("Arial", 12), width=25, height=2, bg="#6C0D95", fg="white", activebackground="#8613B7").grid(row=3, column=0, padx=10, pady=5)
+tk.Button(button_frame, text="Remover Evento", command=..., 
+          font=("Arial", 12), width=25, height=2, bg="#6C0D95", fg="white", activebackground="#8613B7").grid(row=4, column=0, padx=10, pady=5)
+
+
+# Botões de Participantes
+description_button = tk.Label(button_frame,text='Participantes',
+                       font=('Arial', 12, 'bold'), fg= "#000000", bg="#BABFC5").grid(row=0, column=1, padx=10, pady=2)
+
+tk.Button(button_frame, text="Cadastrar Novo Participante", command=...,
+          font=("Arial", 12), width=25, height=2, bg="#15718A", fg="white", activebackground="#0097a7").grid(row=1, column=1, padx=10, pady=5)
+tk.Button(button_frame, text="Listar Todos os Participantes", command=...,
+          font=("Arial", 12), width=25, height=2, bg="#15718A", fg="white", activebackground="#0097a7").grid(row=2, column=1, padx=10, pady=5)
+tk.Button(button_frame, text="Inscrever Participante em Evento", command=..., 
+          font=("Arial", 12), width=25, height=2, bg="#15718A", fg="white", activebackground="#0097a7").grid(row=3, column=1, padx=10, pady=5)
+
+
+# Outras Ações Chave (Estatísticas e Remoção Geral de Participante)
+description_button = tk.Label(button_frame,text='Outros',
+                       font=('Arial', 12, 'bold'), fg= "#000000", bg="#BABFC5").grid(row=0, column=2, padx=10, pady=2)
+
+tk.Button(button_frame, text="Gerar Estatísticas", command=..., 
+          font=("Arial", 12), width=25, height=2, bg="#BE1850", fg="white", activebackground="#E91E63").grid(row=1, column=2, padx=10, pady=5)
+tk.Button(button_frame, text="Remover Participante (Geral)", command=...,
+          font=("Arial", 12), width=25, height=2, bg="#BE1850", fg="white", activebackground="#E91E63").grid(row=2, column=2, padx=10, pady=5)
+tk.Button(button_frame, text="Buscar Participante por ID", command=..., 
+          font=("Arial", 12), width=25, height=2, bg="#BE1850", fg="white", activebackground="#E91E63").grid(row=3, column=2, padx=10, pady=5)
+
+
+
+
+# `root.mainloop()`: Esta linha é a mais importante para iniciar a GUI.
+# Ela inicia o "loop de eventos" do Tkinter. A aplicação fica rodando,
+# esperando por interações do usuário (cliques em botões, digitação, etc.).
+# Sem esta linha, a janela Tkinter apareceria e fecharia imediatamente.
+root.mainloop()
