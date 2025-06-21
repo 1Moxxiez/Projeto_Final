@@ -18,7 +18,7 @@ from tkinter import messagebox # Para exibir mensagens pop-up
 
 # Importa os módulos que contêm as funções lógicas e de dados
 # import data_manager       # Gerencia os dados
-# import gui_elements       # Funções de interface (como nova janela de texto)
+import gui_elements       # Funções de interface (como nova janela de texto)
 # import event_functions    # Funções para eventos
 # import participant_functions # Funções para participantes
 # import report_functions   # Funções para relatórios e estatísticas
@@ -38,7 +38,7 @@ root.geometry('900x650') # Define o tamanho inicial da janela (largura x altura 
 
 # Informa ao módulo `gui_elements` qual é a janela raiz.
 # Isso é crucial para que `show_in_new_window` possa criar janelas filhas corretamente.
-# gui_elements.set_rot_window(root)
+gui_elements.set_root_window(root)
 
 
 
