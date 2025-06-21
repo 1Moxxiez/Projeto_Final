@@ -117,7 +117,7 @@ def set_initial_participant_id_counter():
         max_id_num = 0 # Guarda o maior número de crachá que eu encontrei até agora. Começa em zero.
         
         # Percorre a chave do particiipante_data - todos os IDs de participantes existentes
-        for p_id in participants_data.keys()
+        for p_id in participants_data.keys():
             try:
                 # Verifica se o ID começa com 'P' e se o restante é um número
                 # "Para cada crachá, eu tento tirar a letra 'P' e converter o resto para um número."
@@ -128,4 +128,74 @@ def set_initial_participant_id_counter():
                 if p_id.startswith('P') and p_id[1:].isdigit():
                     num_part = int(p_id[1:])
                     # Se este número for maior que o máximo encontrado até agora, atualiza o máximo
-                    
+                    if num_part > max_id_num:
+                        max_id_num = num_part
+                        
+            except ValueError: # <--- Se a linha acima der ValueError
+                # Então, o Python vem para cá.
+                # 'pass' significa "não faça nada, apenas continue o programa".
+                pass
+        # Define o próximo ID como o maior ID encontrado + 1
+        next_participant_id_num = max_id_num + 1
+    
+    else:
+        # Se não houver participantes, o contador começa em 1.
+        next_participant_id_num = 1
+        
+    
+    
+# -----------------------------------------------------------------
+# 3. Importação de Dados de Exemplo (Mock Data)
+# -----------------------------------------------------------------
+
+# (Depende de tkinter para messagebox, então será chamada do main.py ou passada como argumento)
+# Esta função simula o carregamento de dados de arquivos .py
+# Em um sistema real, você leria esses dados de arquivos ou de um banco de dados e  ia só apaga td.
+def import_mock_data_internal():
+    """
+    Simula a importação de dados de eventos e participantes.
+    Carrega dados de exemplo para os dicionários `events_data` e `participants_data`.
+    """
+    # Usamos 'global' para indicar que estamos acessando e modificando as variáveis globais
+    # `events_data`, `participants_data` e `next_participant_id_num` definidas acima.
+    global events_data, participants_data
+
+    # Limpa os dados existentes antes de carregar os novos, para evitar duplicatas ao importar
+    # múltiplas vezes (se o sistema permitisse).
+    events_data.clear()
+    participants_data.clear()
+
+# -----------------------------------------------------------------
+# 1.  Dados de exemplo de eventos.
+# -----------------------------------------------------------------
+
+    #  nomes já estão aqui com a primeira letra maiúscula para demonstrar a consistência.
+    mock_events = [
+        {"name": "Workshop de IA", "data": "2025-07-10", "theme": "Inteligência Artificial", "participants": ["P001", "P002", "P003"]},
+        {"name": "Maratona de Programação", "data": "2025-08-15", "theme": "Programação", "participants": ["P001", "P004"]},
+        {"name": "Palestra sobre Cibersegurança", "data": "2025-09-01", "theme": "Segurança", "participants": ["P002", "P005", "P006"]},
+        {"name": "Mini-curso de Webdev", "data": "2025-10-20", "theme": "Web", "participants": ["P003", "P004"]},
+        {"name": "Hackathon Inovação", "data": "2025-11-05", "theme": "Inovação", "participants": []},
+        {"name": "Workshop de Redes", "data": "2025-07-25", "theme": "Redes", "participants": ["P001", "P002"]}
+    ]
+    
+    
+# -----------------------------------------------------------------
+# 2.  Dados de exemplo de eventos.
+# -----------------------------------------------------------------
+
+    # IDs já em maiúsculas e nomes capitalizados.
+    mock_participants = [
+        {"id": "P001", "name": "Alice Silva", "email": "alice@email.com", "preferences": "IA, Programação"},
+        {"id": "P002", "name": "Bruno Costa", "email": "bruno@email.com", "preferences": "Segurança, Redes"},
+        {"id": "P003", "name": "Carla Dias", "email": "carla@email.com", "preferences": "IA, Web"},
+        {"id": "P004", "name": "Daniel Evangelista", "email": "daniel@email.com", "preferences": "Programação, Web"},
+        {"id": "P005", "name": "Eduarda Fernandes", "email": "eduarda@email.com", "preferences": "Segurança"},
+        {"id": "P006", "name": "Felipe Garcia", "email": "felipe@email.com", "preferences": "Segurança"},
+    ]
+
+# -----------------------------------------------------------------
+# Preenche o dicionário `events_data` com os dados de exemplo
+# -----------------------------------------------------------------
+
+    for even
