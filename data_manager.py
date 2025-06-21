@@ -67,3 +67,36 @@ participants_data = {}
 # Começa em 1 porque P000 não é comum.
 next_participant_id_num = 1
 
+# -----------------------------------------------------------------
+# 2. Funções de Suporte ao Gerenciamento de Dados
+# -----------------------------------------------------------------
+
+def generate_next_participant_id():
+    """
+    ALGORITMO 1: Geração de ID Automático (Seqüencial e Formatado)
+
+    Objetivo: Criar um ID único e fácil de ler para cada novo participante.
+    Como Funciona (A "Receita" para o ID):
+    1. Acessa o contador global de IDs (`next_participant_id_num`).
+    
+    2. Cria o novo ID formatado como "P" seguido de 3 dígitos (ex: P001, P015, P123).
+       - `f"P{next_participant_id_num:03d}"`: Isso é uma f-string (string formatada).
+         - `P`: É um prefixo fixo.
+         - `{next_participant_id_num:03d}`: Pega o valor do contador e o formata:
+           - `:03d`: Garante que o número tenha pelo menos 3 dígitos, preenchendo com zeros à esquerda se necessário
+                     (ex: 1 vira 001, 15 vira 015). O 'd' indica que é um número inteiro.
+    
+    3. Converte o ID resultante para letras MAIÚSCULAS (`.upper()`) para padronização (ex: "p001" vira "P001").
+    
+    4. Incrementa o contador global para que o próximo ID gerado seja diferente.
+    
+    5. Retorna o ID recém-gerado.
+
+    Lembrete: Pense nisso como um "gerador de senhas únicas" para participantes,
+              mas que são numéricas e em sequência.
+    """
+    
+    global next_participant_id_num # Indica que estamos modificando a variável global, não criando uma local
+    new_id = f'P{next_participant_id_num:03d}'
+    next_participant_id_num += 1
+    return new_id
