@@ -132,11 +132,11 @@ description_button = tk.Label(button_frame,text='Eventos',
                        font=('Arial', 12, 'bold'), fg= "#000000", bg="#BABFC5").grid(row=0, column=0, )
 
 tk.Button(button_frame, text='Adicionar Evento', command= ..., 
-          font=('Arial', 12), width=25, height=2, bg="#6C0D95", fg="white", activebackground='#8613B7').grid(row=2, column=0, padx=10, pady=2)
+          font=('Arial', 12), width=25, height=2, bg="#6C0D95", fg="white", activebackground='#8613B7').grid(row=1, column=0, padx=10, pady=2)
 tk.Button(button_frame, text="Exibir Eventos", command=..., 
-          font=("Arial", 12), width=25, height=2, bg="#6C0D95", fg="white", activebackground="#8613B7").grid(row=3, column=0, padx=10, pady=5)
+          font=("Arial", 12), width=25, height=2, bg="#6C0D95", fg="white", activebackground="#8613B7").grid(row=2, column=0, padx=10, pady=5)
 tk.Button(button_frame, text="Remover Evento", command=..., 
-          font=("Arial", 12), width=25, height=2, bg="#6C0D95", fg="white", activebackground="#8613B7").grid(row=4, column=0, padx=10, pady=5)
+          font=("Arial", 12), width=25, height=2, bg="#6C0D95", fg="white", activebackground="#8613B7").grid(row=3, column=0, padx=10, pady=5)
 
 
 # Botões de Participantes
