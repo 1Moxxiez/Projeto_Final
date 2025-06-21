@@ -17,6 +17,7 @@ import tkinter as tk # Para criar interfaces gráficas
 from tkinter import messagebox # Para exibir mensagens pop-up
 
 # Importa os módulos que contêm as funções lógicas e de dados
+
 # import data_manager       # Gerencia os dados
 import gui_elements       # Funções de interface (como nova janela de texto)
 # import event_functions    # Funções para eventos
