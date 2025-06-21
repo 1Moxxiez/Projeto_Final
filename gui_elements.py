@@ -5,9 +5,7 @@ Conterá funções auxiliares para a interface gráfica (como exibir janelas de 
 # =================================================================
 # MÓDULO: ELEMENTOS DA INTERFACE GRÁFICA (GUI ELEMENTS)
 #
-# Este módulo contém funções auxiliares para a criação e exibição
-# de elementos da interface gráfica (GUI), especialmente para
-# mostrar informações em janelas de texto roláveis.
+
 #
 # Conceitos Chave:
 # - Tkinter: Biblioteca padrão do Python para criar GUIs.
