@@ -172,7 +172,7 @@ def import_mock_data_internal():
     #  nomes já estão aqui com a primeira letra maiúscula para demonstrar a consistência.
     mock_events = [
         {"name": "Workshop de IA", "data": "2025-07-10", "theme": "Inteligência Artificial", "participants": ["P001", "P002", "P003"]},
-        {"name": "Maratona de Programação", "data": "2025-08-15", "theme": "Programação", "participants": ["P001", "P004"]},
+        {"name": "maratona de Programação", "data": "2025-08-15", "theme": "Programação", "participants": ["P001", "P004"]},
         {"name": "Palestra sobre Cibersegurança", "data": "2025-09-01", "theme": "Segurança", "participants": ["P002", "P005", "P006"]},
         {"name": "Mini-curso de Webdev", "data": "2025-10-20", "theme": "Web", "participants": ["P003", "P004"]},
         {"name": "Hackathon Inovação", "data": "2025-11-05", "theme": "Inovação", "participants": []},
@@ -198,4 +198,52 @@ def import_mock_data_internal():
 # Preenche o dicionário `events_data` com os dados de exemplo
 # -----------------------------------------------------------------
 
-    for even
+    for event in mock_events:
+        # Pega o nome do evento, capitaliza (maiusculo) a primeira letra e usa como chave
+        events_data[event['name'].capitalize()] = {
+            'data': event["data"],
+            "theme": event["theme"].capitalize(), # Capitaliza o tema também
+            "participants": event["participants"]
+        }
+        
+        #EXEMPLO: {
+#   "Nome do Evento": {
+#       "data": "AAAA-MM-DD",
+#       "theme": "Tema do Evento",
+#       "participants": ["ID_Participante_1", "ID_Participante_2"]
+#   },
+
+
+# -----------------------------------------------------------------
+ # Preenche o dicionário `participants_data` com os dados de exemplo
+# -----------------------------------------------------------------
+
+    for participant in mock_participants:
+        # Pega o ID do participante, converte para maiúsculas e usa como chave
+        # Pega o nome do participante, capitaliza a primeira letra
+        participants_data[participant["id"].upper()] = {
+            "name": participant["name"].capitalize(),
+            "email": participant["email"],
+            "preferences": participant["preferences"]
+        }
+        
+#        {
+#   "P001": {
+#       "name": "Nome do Participante",
+#       "email": "email@example.com",
+#       "preferences": "Preferências Temáticas"
+#   },
+    
+    # Após carregar os dados de exemplo, ajusta o contador de ID
+    # para que novos IDs automáticos continuem a sequência correta.
+    set_initial_participant_id_counter()
+    
+    
+# "handle_" indica uma função que responde a uma ação do usuário. 
+# Ela orquestra as etapas da interface e da lógica de dados.
+def handle_import_mock_data():
+    """Função wrapper para exibir mensagem após importação."""
+    import_mock_data_internal()
+    messagebox.showinfo("Importar Dados", "Dados de exemplo importados com sucesso!")
+    # Esta mensagem será exibida via Tkinter (por isso é comentada aqui, será chamada no main)
+    # messagebox.showinfo("Importar Dados", "Dados de exemplo importados com sucesso!")   

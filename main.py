@@ -18,7 +18,7 @@ from tkinter import messagebox # Para exibir mensagens pop-up
 
 # Importa os módulos que contêm as funções lógicas e de dados
 
-# import data_manager       # Gerencia os dados
+import data_manager       # Gerencia os dados
 import gui_elements       # Funções de interface (como nova janela de texto)
 # import event_functions    # Funções para eventos
 # import participant_functions # Funções para participantes
@@ -182,7 +182,7 @@ file_menu = tk.Menu(menubar, tearoff=0) # `tearoff=0` impede que o menu seja "ar
 menubar.add_cascade(label="Arquivo", menu=file_menu) # Adiciona o menu "Arquivo" à barra de menu
 # Adiciona itens ao menu "Arquivo"
 
-file_menu.add_command(label="Importar Dados (Exemplo)", command=...)
+file_menu.add_command(label="Importar Dados (Exemplo)", command=data_manager.handle_import_mock_data)
 file_menu.add_separator() # Adiciona uma linha separadora
 file_menu.add_command(label="Sair", command=root.quit) # `root.quit` fecha a aplicação
 
