@@ -61,7 +61,7 @@ def show_in_new_window(title, content):
        - `wrap=tk.WORD`: Garante que as linhas de texto quebrem em palavras inteiras,
          melhorando a legibilidade.
          
-       - `width` e `height`: Definem o tamanho inicial da área de texto em caracteres.
+       
     
     4. `text_area.pack(padx=10, pady=10)`: Posiciona a área de texto na nova janela.
        - `padx` e `pady`: Adicionam um espaçamento ao redor do texto.
