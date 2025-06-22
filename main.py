@@ -20,7 +20,7 @@ from tkinter import messagebox # Para exibir mensagens pop-up
 
 import data_manager       # Gerencia os dados
 import gui_elements       # Funções de interface (como nova janela de texto)
-# import event_functions    # Funções para eventos
+import event_functions    # Funções para eventos
 # import participant_functions # Funções para participantes
 # import report_functions   # Funções para relatórios e estatísticas
 
