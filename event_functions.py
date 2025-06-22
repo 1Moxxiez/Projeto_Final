@@ -32,3 +32,27 @@ from gui_elements import show_in_new_window
 # -----------------------------------------------------------------
 # Funções de Gerenciamento de Eventos
 # -----------------------------------------------------------------
+
+def display_events():
+    """
+    Exibe uma lista detalhada de todos os eventos cadastrados no sistema.
+
+    Processo:
+    1. Verifica se há eventos. Se não, informa o usuário.
+    2. Usa `map` para transformar cada dicionário de evento em uma string formatada.
+       Pense em: para cada 'figurinha de evento', crie um 'cartão de descrição'.
+    3. Junta todos os 'cartões de descrição' em uma única string longa.
+    4. Exibe esta string em uma nova janela de texto rolável.
+    """
+    
+    if not data_manager.events_data: # Verifica se o dicionário de eventos está vazio
+        messagebox.showinfo("Exibir Eventos", "Nenhum evento cadastrado.")
+        return # Sai da função se não houver eventos
+    
+    # =================================================================
+    # items() = É um método de dicionários que retorna uma lista de pares
+    # (chave, valor). No nosso "álbum", ele te dá o nome da figurinha e a figurinha em si.
+    
+    # \n é um caractere especial que representa uma quebra de linha,
+    # fazendo com que o próximo texto apareça na linha de baixo.
+    # =================================================================
