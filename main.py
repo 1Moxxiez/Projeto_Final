@@ -193,7 +193,7 @@ menubar.add_cascade(label="Eventos", menu=event_menu)
 event_menu.add_command(label="Exibir Todos os Eventos", command=event_functions.display_events)
 event_menu.add_command(label="Adicionar Novo Evento", command=event_functions.add_new_event)
 event_menu.add_command(label="Remover Evento", command=event_functions.remove_event)
-event_menu.add_command(label="Atualizar Informações do Evento", command=...)
+event_menu.add_command(label="Atualizar Informações do Evento", command=event_functions.update_event_info)
 event_menu.add_separator()
 event_menu.add_command(label="Identificar Eventos com Poucos Participantes", command=...)
 event_menu.add_command(label="Agrupar Eventos por Tema", command=...) # Funções de relatório aqui
