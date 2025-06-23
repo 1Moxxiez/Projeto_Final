@@ -92,7 +92,7 @@ def display_events():
     
     
 # -----------------------------------------------------------------
-# Adicionar evento
+# Verificação de data
 # -----------------------------------------------------------------
 
 def is_valid_date(date_str):
@@ -123,6 +123,10 @@ def is_valid_date(date_str):
         # Se um ValueError ocorrer, significa que a string não é uma data válida ou não está no formato esperado.
         return False # A data é inválida.
         
+        
+# -----------------------------------------------------------------
+# Adicionar evento
+# -----------------------------------------------------------------
 
 def add_new_event():
     """
@@ -185,3 +189,8 @@ def add_new_event():
     # Adiciona o evento ao dicionário, com a data validada e o tema capitalizado
     data_manager.events_data[name] = {"data": data, "theme": theme.capitalize(), "participants": []}
     messagebox.showinfo("Sucesso", f"Evento '{name}' adicionado.")
+    
+    
+# -----------------------------------------------------------------
+# Remover evento
+# -----------------------------------------------------------------
