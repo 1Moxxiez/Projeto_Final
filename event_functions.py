@@ -154,9 +154,12 @@ def add_new_event():
     pop-up projetada especificamente para receber uma string (texto) como entrada do usuário.
     """
     
-    name = simpledialog.askstring("Adicionar Evento", "Nome do Evento:").capitalize() #caixinha que pergunta o nome
-    if not name: # se n tiver nada escrito sai da função
+    name_input = simpledialog.askstring("Adicionar Evento", "Nome do Evento:") #caixinha que pergunta o nome
+    if not name_input: # se n tiver nada escrito sai da função
         return
+    
+    name = name_input.capitalize()
+    
     if name in data_manager.events_data: # se o mesmo nome no events_data ele sai da função 
         messagebox.showerror("Erro", "Evento com este nome já existe.")
         return
@@ -182,12 +185,14 @@ def add_new_event():
     
     # --- FIM DA VALIDAÇÃO DE DATA ---
     
-    theme = simpledialog.askstring("Adicionar Evento", "Tema Central:")
-    if not theme: return
+    theme_input = simpledialog.askstring("Adicionar Evento", "Tema Central:")
+    if not theme_input: return
+    
+    theme = theme_input.capitalize()
     
     # Aplica .capitalize() SOMENTE se a entrada for válida: Se a execução passar pelo if not theme: return
     # Adiciona o evento ao dicionário, com a data validada e o tema capitalizado
-    data_manager.events_data[name] = {"data": data, "theme": theme.capitalize(), "participants": []}
+    data_manager.events_data[name] = {"data": data, "theme": theme, "participants": []}
     messagebox.showinfo("Sucesso", f"Evento '{name}' adicionado.")
     
     
@@ -214,8 +219,10 @@ def remove_event():
     do dicionário data_manager.events_data.
     """
     
-    name = simpledialog.askstring("Remover Evento", "Nome do Evento a remover:").capitalize()
-    if not name: return
+    name_input = simpledialog.askstring("Remover Evento", "Nome do Evento a remover:")
+    if not name_input: return
+    
+    name = name_input.capitalize()
     
     if name in data_manager.events_data:
         del data_manager.events_data[name] # Remove a entrada do dicionário
@@ -262,8 +269,10 @@ def update_event_info():
         - Se ele encontra a chave, ele retorna o valor completo associado a essa chave. 
     """
     
-    event_name = simpledialog.askstring("Atualizar Evento", "Nome do Evento a atualizar:").capitalize()
-    if not event_name: return
+    event_name_input = simpledialog.askstring("Atualizar Evento", "Nome do Evento a atualizar:")
+    if not event_name_input: return
+    
+    event_name = event_name_input.capitalize()
 
     # Usando .get() para analisar as key principais e obter o dicionário de detalhes do evento dentro delas.
     # 'event_details' agora é uma referência direta ao dicionário interno do evento.
@@ -273,17 +282,20 @@ def update_event_info():
         return
     
     # Aumentamos as opções para incluir "nome"
-    borboleta = simpledialog.askstring("Atualizar Evento", "Campo para atualizar (nome, data, tema):").lower()
-    if not borboleta: return
+    borboleta_input = simpledialog.askstring("Atualizar Evento", "Campo para atualizar (nome, data, tema):")
+    if not borboleta_input: return
         
+    borboleta = borboleta_input.lower()
         
     # --- Lógica de atualização de campo ---
     if borboleta == "nome":
         # === CASO ESPECIAL: ATUALIZAR O NOME DO EVENTO (que é a CHAVE) ===
-        new_name = simpledialog.askstring("Atualizar Evento", "Novo nome para o evento:").capitalize()
-        if not new_name:
+        new_name_input = simpledialog.askstring("Atualizar Evento", "Novo nome para o evento:")
+        if not new_name_input:
             messagebox.showerror("Erro", "Novo nome inválido. Atualização cancelada.")
             return
+        
+        new_name = new_name_input.capitalize()
         
         if new_name == event_name:
             messagebox.showinfo("Informação", "O novo nome é o mesmo que o atual. Nenhuma alteração feita.")
@@ -331,12 +343,14 @@ def update_event_info():
     
     elif borboleta == "theme":
         # === ATUALIZAR O TEMA ===
-        new_theme = simpledialog.askstring("Atualizar Evento", "Novo tema:")
-        if not new_theme:
+        new_theme_input = simpledialog.askstring("Atualizar Evento", "Novo tema:")
+        if not new_theme_input:
             messagebox.showerror("Erro", "Valor inválido. Atualização cancelada.")
             return
         
-        event_details['theme'] = new_theme.capitalize() # Capitaliza e atualiza o tema
+        new_theme = new_theme_input.capitalize()
+        
+        event_details['theme'] = new_theme # Capitaliza e atualiza o tema
         messagebox.showinfo("Sucesso", f"Tema do evento '{event_name}' atualizado para '{event_details['theme']}'.")
     
     else:
