@@ -196,6 +196,7 @@ def add_new_event():
     messagebox.showinfo("Sucesso", f"Evento '{name}' adicionado.")
     
     
+    
 # -----------------------------------------------------------------
 # Remover evento
 # -----------------------------------------------------------------
@@ -286,6 +287,7 @@ def update_event_info():
     if not borboleta_input: return
         
     borboleta = borboleta_input.lower()
+        
         
     # --- Lógica de atualização de campo ---
     if borboleta == "nome":
