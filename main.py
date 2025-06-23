@@ -136,7 +136,7 @@ tk.Button(button_frame, text='Adicionar Evento', command= event_functions.add_ne
           font=('Arial', 12), width=25, height=2, bg="#6C0D95", fg="white", activebackground='#8613B7').grid(row=1, column=0, padx=10, pady=2)
 tk.Button(button_frame, text="Exibir Eventos", command=event_functions.display_events, 
           font=("Arial", 12), width=25, height=2, bg="#6C0D95", fg="white", activebackground="#8613B7").grid(row=2, column=0, padx=10, pady=5)
-tk.Button(button_frame, text="Remover Evento", command=..., 
+tk.Button(button_frame, text="Remover Evento", command=event_functions.remove_event, 
           font=("Arial", 12), width=25, height=2, bg="#6C0D95", fg="white", activebackground="#8613B7").grid(row=3, column=0, padx=10, pady=5)
 
 
@@ -190,9 +190,9 @@ file_menu.add_command(label="Sair", command=root.quit) # `root.quit` fecha a apl
 event_menu = tk.Menu(menubar, tearoff=0)
 menubar.add_cascade(label="Eventos", menu=event_menu)
 
-event_menu.add_command(label="Exibir Todos os Eventos", command=...)
+event_menu.add_command(label="Exibir Todos os Eventos", command=event_functions.display_events)
 event_menu.add_command(label="Adicionar Novo Evento", command=event_functions.add_new_event)
-event_menu.add_command(label="Remover Evento", command=...)
+event_menu.add_command(label="Remover Evento", command=event_functions.remove_event)
 event_menu.add_command(label="Atualizar Informações do Evento", command=...)
 event_menu.add_separator()
 event_menu.add_command(label="Identificar Eventos com Poucos Participantes", command=...)

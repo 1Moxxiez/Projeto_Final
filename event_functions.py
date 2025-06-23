@@ -224,3 +224,125 @@ def remove_event():
         messagebox.showerror("Erro", "Evento não encontrado.")
         
         
+        
+
+# -----------------------------------------------------------------
+# Atualiza evento
+# -----------------------------------------------------------------
+
+
+def update_event_info():
+    """
+    Permite atualizar informações específicas de um evento existente (nome, data ou tema).
+
+    Processo:
+    1. Solicita o nome do evento a ser atualizado.
+   
+    2. Verifica se o evento existe.
+   
+    3. Pergunta qual campo o usuário deseja atualizar ("nome", "data" ou "tema").
+   
+    4. Solicita o novo valor.
+   
+    5. Se for o nome, realiza uma operação especial para mudar a chave do dicionário.
+   
+    6. Se for data ou tema, atualiza o valor correspondente.
+   
+    7. Confirma a atualização.
+    
+    
+    
+    data_manager.events_data[event_name] pra acessar o valor se n existir da erro do tipo KeyError (erro de chave), e seu programa travaria.
+    
+    Usando o método .get(): data_manager.events_data.get(event_name): e a event_name não existir no dicionário, em vez de levantar um KeyError, 
+    o método .get() simplesmente retorna o valor None (que significa "nada").
+    
+    event_name é a chave principal que você está buscando (por exemplo, "Workshop de IA").
+        - O método .get() procura por essa event_name no dicionário data_manager.events_data. 
+        - Se ele encontra a chave, ele retorna o valor completo associado a essa chave. 
+    """
+    
+    event_name = simpledialog.askstring("Atualizar Evento", "Nome do Evento a atualizar:").capitalize()
+    if not event_name: return
+
+    # Usando .get() para analisar as key principais e obter o dicionário de detalhes do evento dentro delas.
+    # 'event_details' agora é uma referência direta ao dicionário interno do evento.
+    event_details = data_manager.events_data.get(event_name) # .get() retorna None se a chave não existe
+    if not event_details:
+        messagebox.showerror("Erro", "Evento não encontrado.")
+        return
+    
+    # Aumentamos as opções para incluir "nome"
+    borboleta = simpledialog.askstring("Atualizar Evento", "Campo para atualizar (nome, data, tema):").lower()
+    if not borboleta: return
+        
+        
+    # --- Lógica de atualização de campo ---
+    if borboleta == "nome":
+        # === CASO ESPECIAL: ATUALIZAR O NOME DO EVENTO (que é a CHAVE) ===
+        new_name = simpledialog.askstring("Atualizar Evento", "Novo nome para o evento:").capitalize()
+        if not new_name:
+            messagebox.showerror("Erro", "Novo nome inválido. Atualização cancelada.")
+            return
+        
+        if new_name == event_name:
+            messagebox.showinfo("Informação", "O novo nome é o mesmo que o atual. Nenhuma alteração feita.")
+            return
+
+        if new_name in data_manager.events_data:
+            messagebox.showerror("Erro", f"Já existe um evento com o nome '{new_name}'.")
+            return
+        
+        # 1. Armazena os detalhes do evento atual antes de deletar
+        # Precisamos de uma cópia dos detalhes, ou o 'del' abaixo os removerá.
+        # Mas 'event_details' já é uma referência ao objeto, então vamos manipulá-lo e depois reatribuir.
+        
+        # 2. Deleta a entrada antiga do dicionário usando o nome antigo como chave
+        del data_manager.events_data[event_name]
+        
+        # 3. Adiciona uma nova entrada ao dicionário com o novo nome como chave
+        # Os 'event_details' ainda contêm os mesmos dados (data, theme, participants).
+        # Apenas a chave externa no dicionário principal muda.
+        data_manager.events_data[new_name] = event_details
+        
+        messagebox.showinfo("Sucesso", f"Nome do evento '{event_name}' atualizado para '{new_name}'.")
+        
+        
+        
+        
+        
+    elif borboleta == "data":
+        # === ATUALIZAR A DATA ===
+        while True: # Loop de validação de data
+            new_date = simpledialog.askstring("Atualizar Evento", "Nova data (AAAA-MM-DD):")
+            if not new_date:
+                messagebox.showerror("Erro", "Valor inválido. Atualização cancelada.")
+                return # Sai da função se o usuário cancelar
+            
+            if is_valid_date(new_date):
+                event_details['data'] = new_date # Atualiza a data no dicionário de detalhes
+                messagebox.showinfo("Sucesso", f"Data do evento '{event_name}' atualizada para '{new_date}'.")
+                break # Sai do loop de validação
+            else:
+                messagebox.showerror("Erro de Data", "Formato de data inválido ou data inexistente. Por favor, use o formato AAAA-MM-DD (ex: 2025-07-10).")
+    
+    
+    
+    
+    elif borboleta == "theme":
+        # === ATUALIZAR O TEMA ===
+        new_theme = simpledialog.askstring("Atualizar Evento", "Novo tema:")
+        if not new_theme:
+            messagebox.showerror("Erro", "Valor inválido. Atualização cancelada.")
+            return
+        
+        event_details['theme'] = new_theme.capitalize() # Capitaliza e atualiza o tema
+        messagebox.showinfo("Sucesso", f"Tema do evento '{event_name}' atualizado para '{event_details['theme']}'.")
+    
+    else:
+        # === CAMPO INVÁLIDO ===
+        messagebox.showerror("Erro", "Campo inválido para atualização. Escolha 'nome', 'data' ou 'tema'.")
+
+
+
+    
