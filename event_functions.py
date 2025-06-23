@@ -194,3 +194,33 @@ def add_new_event():
 # -----------------------------------------------------------------
 # Remover evento
 # -----------------------------------------------------------------
+
+def remove_event():
+    """
+    Permite remover um evento existente do sistema, solicitando o nome.
+
+    Processo:
+    1. Solicita o nome do evento a ser removido.
+       - `.capitalize()`: Para que a busca seja consistente com a forma que os nomes são armazenados.
+       
+    2. Verifica se o evento existe.
+    
+    3. Remove o evento do dicionário `events_data` usando `del`.
+    
+    4. Confirma a remoção.
+    
+    
+    del: remove permanentemente o par chave-valor (name e todos os detalhes do evento associados a ele) 
+    do dicionário data_manager.events_data.
+    """
+    
+    name = simpledialog.askstring("Remover Evento", "Nome do Evento a remover:").capitalize()
+    if not name: return
+    
+    if name in data_manager.events_data:
+        del data_manager.events_data[name] # Remove a entrada do dicionário
+        messagebox.showinfo("Sucesso", f"Evento '{name}' removido.")
+    else:
+        messagebox.showerror("Erro", "Evento não encontrado.")
+        
+        
