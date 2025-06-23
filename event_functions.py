@@ -29,10 +29,14 @@ from tkinter import messagebox, simpledialog
 import data_manager
 from gui_elements import show_in_new_window
 
-# -----------------------------------------------------------------
+# =================================================================
 # Funções de Gerenciamento de Eventos
-# -----------------------------------------------------------------
+# =================================================================
 
+
+# -----------------------------------------------------------------
+# Exibir eventos
+# -----------------------------------------------------------------
 def display_events():
     """
     Exibe uma lista detalhada de todos os eventos cadastrados no sistema.
@@ -56,3 +60,28 @@ def display_events():
     # \n é um caractere especial que representa uma quebra de linha,
     # fazendo com que o próximo texto apareça na linha de baixo.
     # =================================================================
+    
+     # --- Usando map para formatar cada evento em uma string ---
+    # map(funcao, iteravel) aplica 'funcao' a cada item do 'iteravel'.
+    # Aqui, o iterável é data_manager.events_data.items(), que nos dá (name, details) para cada evento.
+    # A função lambda é a "receita" de como formatar cada (item), par (name, details).
+    # Ela retorna uma string formatada para cada evento.
+    
+    formatted_events = map(
+        lambda item: (
+            f"Nome: {item[0]}\n" # item[0] é o 'name' (chave do dicionário events_data)
+            f"Data: {item[1]['data']}\n" # item[1] é o 'details' (valor do dicionário events_data), e acessamos a 'data' dentro dele
+            f"Tema: {item[1]['theme']}\n"
+            f"Participantes: {len(item[1]['participants'])}\n"
+            f"------------------------" # Separador para cada evento, sem \n final aqui
+        ),
+        data_manager.events_data.items() #gera a tupla (chave, valor) --> item
+    )
+    # formatted_events é um ITERADOR, não uma lista. Ele vai gerar as strings sob demanda.
+
+    # Junta todas as strings formatadas de eventos em uma única grande string.
+    # '\n\n'.join(...) coloca duas quebras de linha entre cada bloco de evento.
+    events_str = "--- Lista de Eventos ---\n\n" + "\n\n".join(formatted_events)
+    
+    show_in_new_window("Lista de Eventos", events_str) # Exibe o texto na nova janela
+    

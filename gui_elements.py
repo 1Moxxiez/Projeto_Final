@@ -85,7 +85,7 @@ def show_in_new_window(title, content):
     new_window.title(title) #Define o título da nova janela
     
      # Cria uma área de texto com barras de rolagem automáticas
-    text_area = scrolledtext.ScrolledText(new_window, wrap=tk.WORD, width=80, heigth=25)
+    text_area = scrolledtext.ScrolledText(new_window, wrap=tk.WORD, width=80, height=25)
     text_area.pack(padx=10,pady=10) # Posiciona a área de texto na janela
     text_area.insert(tk.END, content)# Insere o conteúdo fornecido no inicio da pagina
     text_area.config(state=tk.DISABLED)# Torna a área de texto somente leitura
