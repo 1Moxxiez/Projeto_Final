@@ -205,7 +205,7 @@ menubar.add_cascade(label='Participantes', menu=participant_menu)
 
 participant_menu.add_command(label="Cadastrar Novo Participante (ID Automático)", command=participant_functions.add_new_participant_data)
 participant_menu.add_command(label="Listar Todos os Participantes (Ordenado por ID)", command=...)
-participant_menu.add_command(label="Listar Participantes por Evento", command=...)
+participant_menu.add_command(label="Listar Participantes por Evento", command=participant_functions.list_participants_by_event)
 participant_menu.add_command(label="Buscar Participante por ID", command=...)
 participant_menu.add_command(label="Inscrever Participante em Evento", command=...)
 participant_menu.add_command(label="Remover Participante de Evento", command=...)
