@@ -95,11 +95,16 @@ def list_participants_by_event():
 
     Processo:
     1. Solicita o nome do evento (com verificação de entrada).
+    
     2. Verifica se o evento existe.
+    
     3. Se o evento não tem participantes, informa.
+    
     4. Obtém a lista de IDs de participantes do evento e os ordena.
+    
     5. Usa `map` para transformar cada ID de participante em uma string formatada
        com os detalhes do participante.
+    
     6. Constrói e exibe a lista de participantes em uma nova janela.
     """
     
@@ -168,7 +173,9 @@ def search_participant_by_id():
     Processo:
     1. Solicita o ID do participante (com verificação de entrada).
        - `.upper()`: Converte a entrada para maiúsculas para que a busca seja consistente.
+    
     2. Verifica se o participante existe.
+    
     3. Exibe os detalhes do participante em uma messagebox.
     """
     p_id_input = simpledialog.askstring("Buscar Participante por ID", "Digite o ID do participante:")
@@ -196,6 +203,8 @@ def search_participant_by_id():
 
 
 
+
+
 # -----------------------------------------------------------------
 # Adiciionar partcippante e evento
 # -----------------------------------------------------------------
@@ -206,12 +215,17 @@ def add_participant_to_event():
 
     Processo:
     1. Solicita o nome do evento e o ID do participante (com verificações de entrada).
+    
     2. Verifica se o evento existe.
+    
     3. **Verifica o Participante:** Se o participante não existe, pergunta se o usuário deseja cadastrá-lo.
        - Se sim, chama `add_new_participant_data()` (que pode gerar ID automático).
        - Se não, informa e cancela a operação.
+    
     4. Verifica se o participante já está inscrito no evento para evitar duplicatas.
+    
     5. Adiciona o ID do participante à lista de participantes do evento.
+    
     6. Confirma a inscrição.
     """
     event_name_input = simpledialog.askstring("Adicionar Participante ao Evento", "Nome do Evento:")
@@ -228,11 +242,11 @@ def add_participant_to_event():
         return
     p_id = p_id_input.upper() # Converte ID para maiúsculas
     
-     # --- Se o participante não está no sistema, apenas informa e sai. ---
+     # Se o participante não está no sistema, apenas informa e sai
     if p_id not in data_manager.participants_data:
         messagebox.showerror("Erro", f"Participante com ID '{p_id}' não cadastrado no sistema. Por favor, cadastre-o primeiro.")
         return # Sai da função, não oferece mais opções.
-    # --- Fim da Lógica Simplificada ---
+    
 
     # Verifica se o participante já está na lista do evento
     if p_id in data_manager.events_data[event_name]['participants']:
@@ -346,10 +360,15 @@ def update_participant_info():
 
     Processo:
     1. Solicita o ID do participante (com verificação de entrada).
+    
     2. Verifica se o participante existe.
+    
     3. Pergunta qual campo o usuário deseja atualizar (com verificação de entrada).
+    
     4. Solicita o novo valor (com verificações e formatação).
+    
     5. Atualiza o valor no dicionário do participante.
+    
     6. Confirma a atualização.
     """
     p_id_input = simpledialog.askstring("Atualizar Participante", "ID do Participante a atualizar:")
@@ -429,7 +448,7 @@ def list_events_by_participant():
         messagebox.showinfo("Eventos do Participante", f"O participante {data_manager.participants_data[p_id]['name']} não está inscrito em nenhum evento.")
         return
     
-    # --- Usando map para formatar os nomes dos eventos encontrados ---
+ 
     # Para cada item (nome_evento, detalhes_evento) na lista de eventos inscritos,
     # queremos apenas uma string formatada como "- Nome do Evento".
     formatted_event_names = map(
