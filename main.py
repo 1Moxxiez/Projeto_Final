@@ -205,14 +205,14 @@ menubar.add_cascade(label='Participantes', menu=participant_menu)
 
 participant_menu.add_command(label="Cadastrar Novo Participante (ID Automático)", command=participant_functions.add_new_participant_data)
 participant_menu.add_command(label="Listar Todos os Participantes (Ordenado por ID)", command=...)
-participant_menu.add_command(label="Listar Participantes por Evento", command=participant_functions.list_participants_by_event)
 participant_menu.add_command(label="Buscar Participante por ID", command=participant_functions.search_participant_by_id)
 participant_menu.add_command(label="Inscrever Participante em Evento", command=participant_functions.add_participant_to_event)
 participant_menu.add_command(label="Remover Participante de Evento", command=participant_functions.remove_participant_from_event)
 participant_menu.add_command(label="Remover Participante Completamente do Sistema", command=participant_functions.remove_participant_completely)
-participant_menu.add_command(label="Atualizar Informações do Participante", command=...)
+participant_menu.add_command(label="Atualizar Informações do Participante", command=participant_functions.update_participant_info)
 participant_menu.add_separator()
-participant_menu.add_command(label="Listar Eventos por Participante", command=...)
+participant_menu.add_command(label="Listar Eventos por Participante", command=participant_functions.list_events_by_participant)
+participant_menu.add_command(label="Listar Participantes por Evento", command=participant_functions.list_participants_by_event)
 
 
 # Menu "Relatórios e Estatísticas"

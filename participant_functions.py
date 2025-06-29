@@ -283,7 +283,7 @@ def remove_participant_from_event():
         
         
 # -----------------------------------------------------------------
-# Remover partcippante de evento
+# Remover partcipante totalmente
 # -----------------------------------------------------------------
 
 def remove_participant_completely():
@@ -332,6 +332,122 @@ def remove_participant_completely():
             
     messagebox.showinfo("Sucesso", 
                         f"Participante {p_id} removido completamente do sistema e de {events_affected} eventos.")
+
+
+
+# -----------------------------------------------------------------
+# Atualizar partcipante 
+# -----------------------------------------------------------------
+
+
+def update_participant_info():
+    """
+    Atualiza informações específicas de um participante (nome, e-mail, preferências).
+
+    Processo:
+    1. Solicita o ID do participante (com verificação de entrada).
+    2. Verifica se o participante existe.
+    3. Pergunta qual campo o usuário deseja atualizar (com verificação de entrada).
+    4. Solicita o novo valor (com verificações e formatação).
+    5. Atualiza o valor no dicionário do participante.
+    6. Confirma a atualização.
+    """
+    p_id_input = simpledialog.askstring("Atualizar Participante", "ID do Participante a atualizar:")
+    if not p_id_input: # Verifica entrada
+        return
+    p_id = p_id_input.upper() # Converte ID para maiúsculas
+    
+    participant = data_manager.participants_data.get(p_id)
+    if not participant:
+        messagebox.showerror("Erro", "Participante não encontrado.")
+        return
+    
+    borboleta_input = simpledialog.askstring("Atualizar Participante", "Campo para atualizar (name, email, preferences):")
+    if not borboleta_input: # Verifica entrada
+        return
+    
+    borboleta = borboleta_input.lower() # Converte para minúsculas
+    
+    if borboleta in ["name", "email", "preferences"]:
+        new_value_input = simpledialog.askstring("Atualizar Participante", f"Novo valor para '{borboleta}':")
+        if not new_value_input: # Verifica entrada
+            messagebox.showerror("Erro", "Valor inválido. Atualização cancelada.")
+            return
+        new_value = new_value_input # Valor padrão é a entrada bruta
+
+        if borboleta == "name":
+            new_value = new_value.capitalize() # Capitaliza o nome ao atualizar
+            
+        data_manager.participants_data[p_id][borboleta] = new_value
+        messagebox.showinfo("Sucesso", f"Campo '{borboleta}' do participante '{p_id}' atualizado.")
+        
+    else:
+        messagebox.showerror("Erro", "Campo inválido para atualização. Escolha 'name', 'email' ou 'preferences'.")
+        
+
+
+
+
+# -----------------------------------------------------------------
+# Listar evento por participantes
+# -----------------------------------------------------------------
+
+def list_events_by_participant():
+    """
+    Lista todos os eventos em que um participante específico está inscrito.
+
+    Processo:
+    1. Solicita o ID do participante (com verificação de entrada).
+    2. Verifica se o participante existe globalmente.
+    3. Usa `filter` para selecionar os eventos onde o participante está inscrito.
+    4. Usa `map` para formatar os nomes dos eventos encontrados.
+    5. Constrói e exibe a lista de eventos em uma nova janela.
+    """
+    p_id_input = simpledialog.askstring("Eventos do Participante", "Digite o ID do participante:")
+    if not p_id_input: # Verifica entrada
+        return
+    p_id = p_id_input.upper() # Converte ID para maiúsculas
+    
+    if p_id not in data_manager.participants_data:
+        messagebox.showerror("Erro", "Participante não encontrado.")
+        return
+    
+    # --- Usando filter para selecionar eventos onde o participante está inscrito ---
+    # item[1]['participants'] é a lista de participantes de um evento.
+    # p_id in item[1]['participants'] verifica se o ID do participante está nessa lista.
+    filtered_events_items = filter(
+        lambda item: p_id in item[1]['participants'], 
+        data_manager.events_data.items()
+    )
+    
+     # filtered_events_items é um ITERADOR.
+
+    # Converte o iterador para uma lista para verificar se há eventos encontrados.
+    filtered_events_list = list(filtered_events_items)
+    
+    if not filtered_events_list:
+        messagebox.showinfo("Eventos do Participante", f"O participante {data_manager.participants_data[p_id]['name']} não está inscrito em nenhum evento.")
+        return
+    
+    # --- Usando map para formatar os nomes dos eventos encontrados ---
+    # Para cada item (nome_evento, detalhes_evento) na lista de eventos inscritos,
+    # queremos apenas uma string formatada como "- Nome do Evento".
+    formatted_event_names = map(
+        lambda item: f"- {item[0]}", # item[0] é o nome do evento
+        filtered_events_list# Usamos a lista já filtrada
+    )
+    # formatted_event_names é outro ITERADOR.
+
+    events_str = f"--- Eventos de {data_manager.participants_data[p_id]['name']} ({p_id}) ---\n" + "\n".join(formatted_event_names) + "\n--------------------------------------"
+    
+    show_in_new_window(f"Eventos de {p_id}", events_str)
+
+
+
+
+
+
+
 
 
 
