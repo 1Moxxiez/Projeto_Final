@@ -184,14 +184,15 @@ def search_participant_by_id():
     info_str = f"--- Informações do Participante ---\n" \
                f"ID: {p_id}\n"\
                f"Nome: {participant_info['name']}\n"\
-               f"Gmail: {participant_info['gmail']}\n"\
+               f"Gmail: {participant_info['email']}\n"\
                f"Preferências: {participant_info['preferences']}\n"\
                f"------------------------------------"
+            
                
 #A barra invertida \ no final de uma linha em Python diz para o código continuar na linha de baixo. caractere de continuação de linha.
 #\n, que é um caractere especial dentro de uma string que causa uma quebra de linha no texto exibido, não no código em si.
 
-
+    messagebox.showinfo("Participante Encontrado", info_str)
 
 
 
@@ -276,3 +277,61 @@ def remove_participant_from_event():
         messagebox.showinfo("Sucesso", f"Participante {p_id} removido do evento '{event_name}'.")
     else:
         messagebox.showerror("Erro", "Participante não encontrado neste evento.")
+        
+        
+        
+        
+        
+# -----------------------------------------------------------------
+# Remover partcippante de evento
+# -----------------------------------------------------------------
+
+def remove_participant_completely():
+    """
+    Remove um participante de forma permanente do sistema e de todos os eventos em que ele esteja.
+
+    Processo:
+    1. Solicita o ID do participante (com verificação de entrada).
+    
+    2. Verifica se o participante existe globalmente.
+    
+    3. Pede uma confirmação do usuário (ação irreversível).
+    
+    4. Remove o participante do dicionário `participants_data`.
+    
+    5. Percorre TODOS os eventos e remove o ID do participante de suas respectivas listas de participantes.
+       (Aqui poderíamos usar map/filter se a lógica fosse mais complexa, mas o for é claro).
+    6. Confirma a remoção total.
+    """
+    p_id_input = simpledialog.askstring("Remover Participante", "ID do Participante a remover completamente:")
+    if not p_id_input: # Verifica entrada
+        return
+    p_id = p_id_input.upper() # Converte ID para maiúsculas
+
+    if p_id not in data_manager.participants_data:
+        messagebox.showerror("Erro", "Participante não encontrado no sistema.")
+        return
+    
+    
+    #caixa de diálogo que retorna True ou False é a messagebox.askyesno().
+    confirm = messagebox.askyesno("Confirmar Remoção", 
+                                  f"Tem certeza que deseja remover o participante {data_manager.participants_data[p_id]['name']} (ID: {p_id}) completamente do sistema e de todos os eventos?")
+    if not confirm:
+        return
+
+    # 1. Remove o participante do dicionário global de participantes
+    del data_manager.participants_data[p_id]
+
+    # 2. Percorre todos os eventos e remove o participante de suas listas
+    events_affected = 0
+        #chave      #detalhes
+    for event_name, details in data_manager.events_data:
+        if p_id in details['participants']:
+            details['participants'].remove
+            events_affected += 1
+            
+    messagebox.showinfo("Sucesso", 
+                        f"Participante {p_id} removido completamente do sistema e de {events_affected} eventos.")
+
+
+

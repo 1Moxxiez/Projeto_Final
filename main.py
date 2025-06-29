@@ -148,7 +148,7 @@ tk.Button(button_frame, text="Cadastrar Novo Participante", command= participant
           font=("Arial", 12), width=25, height=2, bg="#15718A", fg="white", activebackground="#0097a7").grid(row=1, column=1, padx=10, pady=5)
 tk.Button(button_frame, text="Listar Todos os Participantes", command=...,
           font=("Arial", 12), width=25, height=2, bg="#15718A", fg="white", activebackground="#0097a7").grid(row=2, column=1, padx=10, pady=5)
-tk.Button(button_frame, text="Inscrever Participante em Evento", command=..., 
+tk.Button(button_frame, text="Inscrever Participante em Evento", command=participant_functions.add_participant_to_event, 
           font=("Arial", 12), width=25, height=2, bg="#15718A", fg="white", activebackground="#0097a7").grid(row=3, column=1, padx=10, pady=5)
 
 
@@ -158,9 +158,9 @@ description_button = tk.Label(button_frame,text='Outros',
 
 tk.Button(button_frame, text="Gerar Estatísticas", command=..., 
           font=("Arial", 12), width=25, height=2, bg="#BE1850", fg="white", activebackground="#E91E63").grid(row=1, column=2, padx=10, pady=5)
-tk.Button(button_frame, text="Remover Participante (Geral)", command=...,
+tk.Button(button_frame, text="Remover Participante (Geral)", command=participant_functions.remove_participant_completely,
           font=("Arial", 12), width=25, height=2, bg="#BE1850", fg="white", activebackground="#E91E63").grid(row=2, column=2, padx=10, pady=5)
-tk.Button(button_frame, text="Buscar Participante por ID", command=..., 
+tk.Button(button_frame, text="Buscar Participante por ID", command=participant_functions.search_participant_by_id, 
           font=("Arial", 12), width=25, height=2, bg="#BE1850", fg="white", activebackground="#E91E63").grid(row=3, column=2, padx=10, pady=5)
 
 
@@ -206,13 +206,12 @@ menubar.add_cascade(label='Participantes', menu=participant_menu)
 participant_menu.add_command(label="Cadastrar Novo Participante (ID Automático)", command=participant_functions.add_new_participant_data)
 participant_menu.add_command(label="Listar Todos os Participantes (Ordenado por ID)", command=...)
 participant_menu.add_command(label="Listar Participantes por Evento", command=participant_functions.list_participants_by_event)
-participant_menu.add_command(label="Buscar Participante por ID", command=...)
-participant_menu.add_command(label="Inscrever Participante em Evento", command=...)
-participant_menu.add_command(label="Remover Participante de Evento", command=...)
-participant_menu.add_command(label="Remover Participante Completamente do Sistema", command=...)
+participant_menu.add_command(label="Buscar Participante por ID", command=participant_functions.search_participant_by_id)
+participant_menu.add_command(label="Inscrever Participante em Evento", command=participant_functions.add_participant_to_event)
+participant_menu.add_command(label="Remover Participante de Evento", command=participant_functions.remove_participant_from_event)
+participant_menu.add_command(label="Remover Participante Completamente do Sistema", command=participant_functions.remove_participant_completely)
 participant_menu.add_command(label="Atualizar Informações do Participante", command=...)
 participant_menu.add_separator()
-participant_menu.add_command(label="Detectar e Remover Duplicatas em Eventos", command=...)
 participant_menu.add_command(label="Listar Eventos por Participante", command=...)
 
 
