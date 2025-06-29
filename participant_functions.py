@@ -270,3 +270,9 @@ def remove_participant_from_event():
     if not p_id_input: # Verifica entrada
         return
     p_id = p_id_input.upper() # Converte ID para maiúsculas
+    
+    if p_id in data_manager.events_data[event_name]['participants']:
+        data_manager.events_data[event_name]['participants'].remove(p_id)
+        messagebox.showinfo("Sucesso", f"Participante {p_id} removido do evento '{event_name}'.")
+    else:
+        messagebox.showerror("Erro", "Participante não encontrado neste evento.")
