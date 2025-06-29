@@ -447,6 +447,9 @@ def list_events_by_participant():
 
 
 
+# -----------------------------------------------------------------
+# Listar todos os participantes
+# -----------------------------------------------------------------
 def list_all_participants_sorted():
     """
     Objetivo: Listar todos os participantes cadastrados no sistema,

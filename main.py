@@ -146,7 +146,7 @@ description_button = tk.Label(button_frame,text='Participantes',
 
 tk.Button(button_frame, text="Cadastrar Novo Participante", command= participant_functions.add_new_participant_data,
           font=("Arial", 12), width=25, height=2, bg="#15718A", fg="white", activebackground="#0097a7").grid(row=1, column=1, padx=10, pady=5)
-tk.Button(button_frame, text="Listar Todos os Participantes", command=...,
+tk.Button(button_frame, text="Listar Todos os Participantes", command=participant_functions.list_all_participants_sorted,
           font=("Arial", 12), width=25, height=2, bg="#15718A", fg="white", activebackground="#0097a7").grid(row=2, column=1, padx=10, pady=5)
 tk.Button(button_frame, text="Inscrever Participante em Evento", command=participant_functions.add_participant_to_event, 
           font=("Arial", 12), width=25, height=2, bg="#15718A", fg="white", activebackground="#0097a7").grid(row=3, column=1, padx=10, pady=5)
@@ -204,7 +204,7 @@ participant_menu = tk.Menu(menubar, tearoff=0)
 menubar.add_cascade(label='Participantes', menu=participant_menu)
 
 participant_menu.add_command(label="Cadastrar Novo Participante (ID Automático)", command=participant_functions.add_new_participant_data)
-participant_menu.add_command(label="Listar Todos os Participantes (Ordenado por ID)", command=...)
+participant_menu.add_command(label="Listar Todos os Participantes (Ordenado por ID)", command=participant_functions.list_all_participants_sorted)
 participant_menu.add_command(label="Buscar Participante por ID", command=participant_functions.search_participant_by_id)
 participant_menu.add_command(label="Inscrever Participante em Evento", command=participant_functions.add_participant_to_event)
 participant_menu.add_command(label="Remover Participante de Evento", command=participant_functions.remove_participant_from_event)
