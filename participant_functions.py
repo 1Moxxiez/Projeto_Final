@@ -447,7 +447,49 @@ def list_events_by_participant():
 
 
 
+def list_all_participants_sorted():
+    """
+    Objetivo: Listar todos os participantes cadastrados no sistema,
+              ordenados pelo seu ID (em ordem crescente).
 
+    Processo (O "Organizador da Fila"):
+    1. **Verifica Vazio:** Primeiro, checa se existem participantes cadastrados.
+       Se não, avisa o usuário.
+    2. **Coleta e Ordena IDs:** Pega todas as chaves (que são os IDs) do dicionário
+       `data_manager.participants_data`. Em seguida, usa `sorted()` para criar
+       uma nova lista desses IDs, garantindo que estejam em ordem crescente.
+    3. **Formata e Exibe (usando map):** Percorre a lista de IDs ordenada e
+       usa `map` para construir as strings formatadas para cada participante.
+    4. Exibe essa string em uma nova janela rolável.
 
+    Lembrete: Imagine que você está colocando todos os crachás de participantes em ordem
+              numérica para que seja fácil encontrá-los e ler suas informações.
+    """
+    if not data_manager.participants_data:
+        messagebox.showinfo("Listar Participantes", "Nenhum participante cadastrado.")
+        return
+
+    # Pega todos os IDs dos participantes e os ordena em ordem crescente
+    sorted_p_ids = sorted(data_manager.participants_data.keys())
+
+    # --- Usando map para formatar cada participante em uma string ---
+    # A função lambda pega cada p_id da lista ordenada.
+    # Busca as informações do participante em data_manager.participants_data.
+    # Em seguida, retorna uma string formatada para aquele participante.
+    formatted_participants_lines = map(
+        lambda p_id_sorted: (
+            p_info := data_manager.participants_data[p_id_sorted]) 
+        and (
+            f"ID: {p_id_sorted}, Nome: {p_info['name']},\n"
+            f"  Email: {p_info['email']},\n"
+            f"  Preferências: {p_info['preferences']}"
+        ), sorted_p_ids
+    )
+    # formatted_participants_lines é um ITERADOR.
+
+    # Junta todas as linhas formatadas de participantes em uma única grande string.
+    participants_str = "--- Todos os Participantes (Ordenado por ID) ---\n" + "\n\n".join(formatted_participants_lines) + "\n-----------------------------------------"
+    
+    show_in_new_window("Todos os Participantes", participants_str)
 
 
