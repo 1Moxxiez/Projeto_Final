@@ -63,10 +63,10 @@ def add_new_participant_data(p_id=None):
         p_id = data_manager.generate_next_participant_id()
         messagebox.showinfo("Novo ID participante",f"O ID gerado automaticamente para o novo participante é: {p_id}")
     else:
-        p_id = p_id.upper
+        p_id = p_id.upper()
         
     if p_id in data_manager.participants_data:
-        messagebox.showerror('Erro',f'ID de participante '{p_id}' já existe.')
+        messagebox.showerror("Erro',f'ID de participante '{p_id}' já existe.")
         return
 
     name_input = simpledialog.askstring("Cadastrar Participante",f'Nome Completo para ID {p_id}:')

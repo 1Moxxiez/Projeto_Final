@@ -21,7 +21,7 @@ from tkinter import messagebox # Para exibir mensagens pop-up
 import data_manager       # Gerencia os dados
 import gui_elements       # Funções de interface (como nova janela de texto)
 import event_functions    # Funções para eventos
-# import participant_functions # Funções para participantes
+import participant_functions # Funções para participantes
 # import report_functions   # Funções para relatórios e estatísticas
 
 
@@ -144,7 +144,7 @@ tk.Button(button_frame, text="Remover Evento", command=event_functions.remove_ev
 description_button = tk.Label(button_frame,text='Participantes',
                        font=('Arial', 12, 'bold'), fg= "#000000", bg="#BABFC5").grid(row=0, column=1, padx=10, pady=2)
 
-tk.Button(button_frame, text="Cadastrar Novo Participante", command=...,
+tk.Button(button_frame, text="Cadastrar Novo Participante", command= participant_functions.add_new_participant_data,
           font=("Arial", 12), width=25, height=2, bg="#15718A", fg="white", activebackground="#0097a7").grid(row=1, column=1, padx=10, pady=5)
 tk.Button(button_frame, text="Listar Todos os Participantes", command=...,
           font=("Arial", 12), width=25, height=2, bg="#15718A", fg="white", activebackground="#0097a7").grid(row=2, column=1, padx=10, pady=5)
@@ -203,7 +203,7 @@ event_menu.add_command(label="Contar Eventos por Tema", command=...)
 participant_menu = tk.Menu(menubar, tearoff=0)
 menubar.add_cascade(label='Participantes', menu=participant_menu)
 
-participant_menu.add_command(label="Cadastrar Novo Participante (ID Automático)", command=...)
+participant_menu.add_command(label="Cadastrar Novo Participante (ID Automático)", command=participant_functions.add_new_participant_data)
 participant_menu.add_command(label="Listar Todos os Participantes (Ordenado por ID)", command=...)
 participant_menu.add_command(label="Listar Participantes por Evento", command=...)
 participant_menu.add_command(label="Buscar Participante por ID", command=...)
