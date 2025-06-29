@@ -361,4 +361,72 @@ def update_event_info():
 
 
 
+
+
+
+ 
+# -----------------------------------------------------------------
+# Identificar events com poucos participantes
+# -----------------------------------------------------------------
+
+def identify_events_with_few_participants():
+    """
+    Identifica e lista eventos que têm menos de 2 participantes,
+    sugerindo possíveis cancelamentos (como no requisito).
+
+    Processo:
+    1. Usa `filter` para selecionar apenas os eventos que têm menos de 2 participantes.
+       Pense em: "filtrar" as figurinhas que têm poucos participantes.
+    2. Usa `map` para extrair os nomes dos eventos filtrados e formatá-los.
+    3. Junta os nomes formatados em uma única string.
+    4. Exibe a lista desses eventos em uma nova janela.
+    """
+    # --- Usando filter para selecionar eventos com poucos participantes ---
+    # filter(funcao, iteravel) retorna um iterador que contém apenas os itens para os quais
+    # a 'funcao' retorna True.
+    # Aqui, a função lambda verifica se o comprimento da lista de participantes (item[1]['participants'])
+    # é menor que 2. item[1] é o dicionário de detalhes do evento.
     
+    filtered_events_items = filter(
+                        lambda item: len(item[1]['participants']) < 2, 
+                        data_manager.events_data.items()    
+                            )
+    '''
+    .items() em um dicionário, ele retorna chave-valor do dicionário. Cada "par" é uma
+    tupla que contém a chave e o valor correspondente.
+        EX:("Workshop de IA", {"data": "2025-07-10", "theme": "Inteligência Artificial", "participants": ["P001", "P002", "P003"]})
+    
+    item[0] se refere ao primeiro elemento da tupla, que é a chave (o nome do evento, ex: "Workshop de IA").
+
+    item[1] se refere ao segundo elemento da tupla, que é o valor 
+    (o dicionário completo de detalhes do evento, ex: {"data": "...", "theme": "...", "participants": [...]}).
+    
+    '''
+
+    
+    # filtered_events_items é um ITERADOR, que nos dará apenas os itens que passaram no filtro.
+    # Um marcados de papginas que fornece item um por um e não uma lista
+
+    # Convertendo o iterador para uma lista para verificar se há elementos.
+    events_with_few_participants_list = list(filtered_events_items)
+
+    if not events_with_few_participants_list:
+        messagebox.showinfo("Eventos com Poucos Participantes", "Nenhum evento com menos de 2 participantes.")
+        return
+    
+    # --- Usando map para formatar os nomes dos eventos filtrados ---
+    # Agora, para cada item (nome_evento, detalhes_evento) que passou no filtro,
+    # queremos apenas uma string formatada como "- Nome do Evento (Participantes: X)".
+    
+    formatted_event_lines = map(lambda item: 
+                                f'- {item[0]}\n'
+                                f"Participantes {len(item[1]['participants'])}",
+                                events_with_few_participants_list
+                                )
+    
+    # formatted_event_lines é outro ITERADOR.
+    # Junta todas as linhas formatadas em uma única string, separadas por quebra de linha.
+    
+    result_str = "--- Eventos com menos de 2 participantes --- \n\n" + '\n\n'.join(formatted_event_lines) + '\n -----------------------------------------'
+    
+    show_in_new_window('Eventos com poucos participantes', result_str)

@@ -195,7 +195,7 @@ event_menu.add_command(label="Adicionar Novo Evento", command=event_functions.ad
 event_menu.add_command(label="Remover Evento", command=event_functions.remove_event)
 event_menu.add_command(label="Atualizar Informações do Evento", command=event_functions.update_event_info)
 event_menu.add_separator()
-event_menu.add_command(label="Identificar Eventos com Poucos Participantes", command=...)
+event_menu.add_command(label="Identificar Eventos com Poucos Participantes", command=event_functions.identify_events_with_few_participants)
 event_menu.add_command(label="Agrupar Eventos por Tema", command=...) # Funções de relatório aqui
 event_menu.add_command(label="Contar Eventos por Tema", command=...)
 
