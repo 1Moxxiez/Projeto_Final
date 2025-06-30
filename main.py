@@ -219,7 +219,7 @@ participant_menu.add_command(label="Listar Participantes por Evento", command=pa
 reports_menu = tk.Menu(menubar, tearoff=0)
 menubar.add_cascade(label="Relatórios e Estatísticas", menu=reports_menu)
 reports_menu.add_command(label="Gerar Estatísticas Gerais", command=report_functions.generate_statistics)
-reports_menu.add_command(label="Calcular Taxa Média de Participação por Tema", command=...)
+
 
 # Menu "Busca"
 search_menu = tk.Menu(menubar, tearoff=0)
