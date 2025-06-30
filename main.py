@@ -156,7 +156,7 @@ tk.Button(button_frame, text="Inscrever Participante em Evento", command=partici
 description_button = tk.Label(button_frame,text='Outros',
                        font=('Arial', 12, 'bold'), fg= "#000000", bg="#BABFC5").grid(row=0, column=2, padx=10, pady=2)
 
-tk.Button(button_frame, text="Gerar Estatísticas", command=..., 
+tk.Button(button_frame, text="Gerar Estatísticas", command=report_functions.generate_statistics, 
           font=("Arial", 12), width=25, height=2, bg="#BE1850", fg="white", activebackground="#E91E63").grid(row=1, column=2, padx=10, pady=5)
 tk.Button(button_frame, text="Remover Participante (Geral)", command=participant_functions.remove_participant_completely,
           font=("Arial", 12), width=25, height=2, bg="#BE1850", fg="white", activebackground="#E91E63").grid(row=2, column=2, padx=10, pady=5)
@@ -218,7 +218,7 @@ participant_menu.add_command(label="Listar Participantes por Evento", command=pa
 # Menu "Relatórios e Estatísticas"
 reports_menu = tk.Menu(menubar, tearoff=0)
 menubar.add_cascade(label="Relatórios e Estatísticas", menu=reports_menu)
-reports_menu.add_command(label="Gerar Estatísticas Gerais", command=...)
+reports_menu.add_command(label="Gerar Estatísticas Gerais", command=report_functions.generate_statistics)
 reports_menu.add_command(label="Calcular Taxa Média de Participação por Tema", command=...)
 
 # Menu "Busca"
