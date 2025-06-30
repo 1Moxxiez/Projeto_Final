@@ -70,13 +70,14 @@ def generate_statistics():
     
     # ------------------------------------
     # Participantes mais ativos (inscritos em mais eventos)
-    # Aprimorado: Primeiro, coleta todas as participações em uma lista plana de p_ids.
+    # Aprimorado: Primeiro, coleta todas as participações em uma lista de p_ids.
     all_p_ids_in_events = []
     for details in data_manager.events_data.values():
         all_p_ids_in_events.extend(details['participants']) #todos os IDs dessa lista são adicionados um por um ao final da lista all_p_ids_in_events.
     
     #.values() pega apenas os valores de todos os pares chave-valor presentes nesse dicionário.
     #extend() é usado para adicionar todos os itens de um iterável (lista,tupla,string) ao final da lista atual.
+    
     
     # Usa a função Counter do módulo collections para contar rapidamente as ocorrências
     participant_event_counts = Counter(all_p_ids_in_events)
@@ -85,7 +86,7 @@ def generate_statistics():
         
     if participant_event_counts: # Se houver participantes inscritos em eventos
         # Ordena os participantes pela contagem de eventos e pega os 5 primeiros
-        most_active_items = sorted(participant_event_counts.items(), key=lambda item: item[1], reverse=True)[:5]
+        most_active_items = sorted(participant_event_counts.items(), key=lambda item: item[1], reverse=True)[:5]  #é uma lista de tuplas
         '''
         key= (Argumento): É um argumento opcional da função sorted(). 
         Ele especifica uma função (lambda) que será usada para extrair um valor de cada item da coleção antes de compará-los para a ordenação. 
@@ -101,7 +102,6 @@ def generate_statistics():
         stats_str += "\n--- Top 5 Participantes Mais Ativos ---\n"
         
         
-        # --- USANDO COMPREENSÃO DE LISTA AQUI PARA MAIOR CLAREZA ---
         # Itera diretamente sobre os pares (p_id, count_events) já ordenados.
         # Obtém o nome do participante dentro da própria formatação.
         formatted_active_participants = [
@@ -123,7 +123,26 @@ def generate_statistics():
     
     
     
-        # ------------------------------------
+    # ------------------------------------
     # Temas mais frequentes
     all_themes = [details['theme'] for details in data_manager.events_data.values()]
     theme_counts = Counter(all_themes)
+    
+    if theme_counts:
+        most_frequent_themes_items = sorted(theme_counts.items(), key=lambda item: item[1], reverse=True)  #é uma lista de tuplas
+        
+        
+        stats_str += "\n--- Temas Mais Frequentes ---\n"
+        
+        
+        formatted_frequent_themes = map(
+            lambda item: f"Tema: {item[0]}, Eventos: {item[1]}",
+            most_frequent_themes_items
+        )
+        stats_str += "\n".join(formatted_frequent_themes) + "\n"
+    else:
+        stats_str += "\nNenhum tema de evento para calcular os mais frequentes.\n"
+    
+    stats_str += "--------------------------------------"
+    
+    show_in_new_window("Estatísticas", stats_str)
