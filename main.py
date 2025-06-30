@@ -196,8 +196,7 @@ event_menu.add_command(label="Remover Evento", command=event_functions.remove_ev
 event_menu.add_command(label="Atualizar Informações do Evento", command=event_functions.update_event_info)
 event_menu.add_separator()
 event_menu.add_command(label="Identificar Eventos com Poucos Participantes", command=event_functions.identify_events_with_few_participants)
-event_menu.add_command(label="Agrupar Eventos por Tema", command=...) # Funções de relatório aqui
-event_menu.add_command(label="Contar Eventos por Tema", command=...)
+
 
 # Menu 'Participantes'
 participant_menu = tk.Menu(menubar, tearoff=0)
@@ -224,7 +223,7 @@ reports_menu.add_command(label="Gerar Estatísticas Gerais", command=report_func
 # Menu "Busca"
 search_menu = tk.Menu(menubar, tearoff=0)
 menubar.add_cascade(label="Busca", menu=search_menu)
-search_menu.add_command(label="Busca Filtrada (Tema/Data)", command=...)
+search_menu.add_command(label="Busca Filtrada (Nome)", command=report_functions.filter_search)
 
 
 # -----------------------------------------------------------------
