@@ -191,3 +191,53 @@ def filter_search():
     
     # Exibe o resultado da busca em uma nova janela
     show_in_new_window("Resultado da Busca", results_str)
+    
+    
+    
+    
+    ESTUDAR AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+def calculate_avg_participation_rate_per_theme():
+    """
+    Calcula e exibe a taxa média de participação (participantes por evento) para cada tema.
+    """
+    theme_total_participants = {}
+    theme_event_counts = {}
+
+    for name, details in data_manager.events_data.items():
+        theme = details['theme']
+        num_participants = len(details['participants'])
+        
+        theme_total_participants[theme] = theme_total_participants.get(theme, 0) + num_participants
+        theme_event_counts[theme] = theme_event_counts.get(theme, 0) + 1
+    
+    if not theme_total_participants:
+        messagebox.showinfo("Taxa de Participação Média", "Nenhum evento para calcular a taxa de participação.")
+        return
+
+    result_str = "--- Taxa Média de Participação por Tema ---\n"
+    
+    
+    
+    # --- USANDO COMPREENSÃO DE LISTA AQUI PARA MAIOR CLAREZA E ROBUSTEZ ---
+    # Itera sobre os pares (tema, total_participantes)
+    formatted_rates_list = [
+        f"Tema: {theme}, Média de Participantes/Evento: {avg_rate:.2f}"
+        for theme, total_parts in theme_total_participants.items() # Desempacotamento direto no for
+        # Calcula a média dentro da compreensão de lista
+        if (num_events := theme_event_counts.get(theme, 0)) # Atribui num_events usando operador morsa
+        # E verifica se num_events é maior que 0
+        and (avg_rate := total_parts / num_events if num_events > 0 else 0) # Calcula avg_rate usando operador morsa
+    ]
+    # Caso para temas sem eventos ou num_events = 0: a compreensão de lista não os incluirá
+    # se o 'if (num_events := ...)' não for True.
+
+    # Um jeito ainda mais simples, sem o 'if' dentro da compreensão, lidando com 0 na divisão:
+    formatted_rates_list = []
+    for theme, total_parts in theme_total_participants.items():
+        num_events = theme_event_counts.get(theme, 0)
+        avg_rate = total_parts / num_events if num_events > 0 else 0
+        formatted_rates_list.append(f"Tema: {theme}, Média de Participantes/Evento: {avg_rate:.2f}")
+
+    result_str += "\n".join(formatted_rates_list) + "\n------------------------------------------"
+    
+    show_in_new_window("Taxa de Participação Média", result_str)
