@@ -23,7 +23,7 @@ Conterá as funções para relatórios e estatísticas.
 # =================================================================
 
 import tkinter as tk # Para criar interfaces gráficas
-from tkinter import messagebox
+from tkinter import messagebox, simpledialog
 
 from collections import Counter
 
@@ -146,3 +146,48 @@ def generate_statistics():
     stats_str += "--------------------------------------"
     
     show_in_new_window("Estatísticas", stats_str)
+
+
+
+
+def filter_search():
+    """
+    Realiza uma busca por um evento usando o nome.
+
+    Processo:
+    1. Solicita ao usuário o nome do evento a ser buscado (com verificação de entrada).
+    2. Capitaliza o nome para que a busca seja consistente.
+    3. Verifica diretamente se o evento com esse nome existe no `data_manager.events_data`.
+    4. Se encontrado, exibe os detalhes do evento em uma nova janela.
+    5. Se não encontrado, informa o usuário.
+    """
+    # Solicita ao usuário o nome do evento para buscar
+    search_name_input = simpledialog.askstring("Buscar Evento por Nome", "Digite o nome do evento para buscar:")
+    
+    # Verifica se o usuário cancelou ou não digitou nada
+    if not search_name_input:
+        return
+    
+    # Capitaliza o nome digitado para que a busca seja consistente com os nomes armazenados
+    search_name = search_name_input.capitalize()
+
+    # Tenta obter os detalhes do evento usando o nome fornecido.
+    # O método .get() retorna o dicionário de detalhes do evento se encontrado, ou None se não.
+    event_details = data_manager.events_data.get(search_name)
+
+    results_str = "--- Resultados da Busca por Nome ---\n"
+
+    if event_details:
+        # Se o evento foi encontrado, formata seus detalhes
+        results_str += f"Nome: {search_name}\n" \
+                       f"Data: {event_details['data']}\n" \
+                       f"Tema: {event_details['theme']}\n" \
+                       f"Participantes: {len(event_details['participants'])}\n" \
+                       f"--------------------------------------"
+    else:
+        # Se o evento não foi encontrado
+        results_str += f"Nenhum evento encontrado com o nome '{search_name}'.\n" \
+                       f"--------------------------------------"
+    
+    # Exibe o resultado da busca em uma nova janela
+    show_in_new_window("Resultado da Busca", results_str)
