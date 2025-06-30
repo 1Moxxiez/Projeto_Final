@@ -1,15 +1,6 @@
 '''
 Conterá as funções para relatórios e estatísticas.
 '''
-
-import tkinter as tk
-from tkinter import messagebox, simpledialog # <-- simpledialog já estava no seu comentário, mas garanto que está aqui
-
-# Importa as variáveis de dados e funções auxiliares de outros módulos
-import data_manager
-from gui_elements import show_in_new_window
-
-
 # =================================================================
 # MÓDULO: FUNÇÕES DE RELATÓRIOS E ESTATÍSTICAS (REPORT FUNCTIONS)
 #
@@ -28,10 +19,13 @@ from gui_elements import show_in_new_window
 # - `data_manager`: Para acessar `events_data` e `participants_data`.
 # - `gui_elements`: Para exibir os relatórios em novas janelas.
 # - `tkinter.messagebox`, `tkinter.simpledialog`: Para interações com o usuário.
+# - `collections import Counter`, `collections`: Para funcionalidades de contagem avançada (como Counter).
 # =================================================================
 
-import tkinter as tk
+import tkinter as tk # Para criar interfaces gráficas
 from tkinter import messagebox
+
+from collections import Counter
 
 # Importa as variáveis de dados e funções auxiliares de outros módulos
 import data_manager
@@ -85,7 +79,6 @@ def generate_statistics():
     #extend() é usado para adicionar todos os itens de um iterável (lista,tupla,string) ao final da lista atual.
     
     # Usa a função Counter do módulo collections para contar rapidamente as ocorrências
-    from collections import Counter
     participant_event_counts = Counter(all_p_ids_in_events)
     # participant_event_counts agora é um dicionário {ID_participante: contagem}
         # Counter({'P001': 3, 'P002': 2, 'P003': 1, 'P004': 1})
@@ -93,8 +86,44 @@ def generate_statistics():
     if participant_event_counts: # Se houver participantes inscritos em eventos
         # Ordena os participantes pela contagem de eventos e pega os 5 primeiros
         most_active_items = sorted(participant_event_counts.items(), key=lambda item: item[1], reverse=True)[:5]
+        '''
+        key= (Argumento): É um argumento opcional da função sorted(). 
+        Ele especifica uma função (lambda) que será usada para extrair um valor de cada item da coleção antes de compará-los para a ordenação. 
+        É como dizer: "Não ordene pelo item inteiro, ordene por esta 'chave' específica dentro de cada item".
+
+        True: Significa que a ordenação deve ser feita em ordem decrescente (do maior para o menor). Se fosse 
         
+        [:5]: É uma operação de fatiamento de lista (slicing), aplicada depois que sorted() retorna a lista já ordenada.
+        propósito: Seleciona os primeiros 5 elementos da lista resultante. É assim que você obtém o "Top 5" participantes ou temas. 
+        '''        
         
         
         stats_str += "\n--- Top 5 Participantes Mais Ativos ---\n"
+        
+        
+        # --- USANDO COMPREENSÃO DE LISTA AQUI PARA MAIOR CLAREZA ---
+        # Itera diretamente sobre os pares (p_id, count_events) já ordenados.
+        # Obtém o nome do participante dentro da própria formatação.
+        formatted_active_participants = [
+            f"ID: {p_id}, Nome: {data_manager.participants_data.get(p_id, {}).get('name', 'Desconhecido')}, Eventos: {count_events}"
+            for p_id, count_events in most_active_items
+        ]
+        stats_str += "\n".join(formatted_active_participants) + "\n"
+        '''
+        "\n".join(...):
+
+        Ele pega uma lista de strings (ou qualquer outro iterável de strings).
+
+        Ele junta todas essas strings em uma única string maior.
+
+        E entre cada uma das strings originais, ele insere o caractere de quebra de linha (\n).
+        '''
+    else:
+        stats_str += "\nNenhum participante em eventos para calcular os mais ativos.\n"
     
+    
+    
+        # ------------------------------------
+    # Temas mais frequentes
+    all_themes = [details['theme'] for details in data_manager.events_data.values()]
+    theme_counts = Counter(all_themes)
