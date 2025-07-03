@@ -195,7 +195,7 @@ def filter_search():
     
     
     
-    ESTUDAR AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    
 def calculate_avg_participation_rate_per_theme():
     """
     Calcula e exibe a taxa média de participação (participantes por evento) para cada tema.
