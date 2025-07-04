@@ -417,9 +417,13 @@ def list_events_by_participant():
 
     Processo:
     1. Solicita o ID do participante (com verificação de entrada).
+    
     2. Verifica se o participante existe globalmente.
+    
     3. Usa `filter` para selecionar os eventos onde o participante está inscrito.
+    
     4. Usa `map` para formatar os nomes dos eventos encontrados.
+    
     5. Constrói e exibe a lista de eventos em uma nova janela.
     """
     p_id_input = simpledialog.askstring("Eventos do Participante", "Digite o ID do participante:")
@@ -477,11 +481,14 @@ def list_all_participants_sorted():
     Processo (O "Organizador da Fila"):
     1. **Verifica Vazio:** Primeiro, checa se existem participantes cadastrados.
        Se não, avisa o usuário.
+    
     2. **Coleta e Ordena IDs:** Pega todas as chaves (que são os IDs) do dicionário
        `data_manager.participants_data`. Em seguida, usa `sorted()` para criar
        uma nova lista desses IDs, garantindo que estejam em ordem crescente.
+    
     3. **Formata e Exibe (usando map):** Percorre a lista de IDs ordenada e
        usa `map` para construir as strings formatadas para cada participante.
+    
     4. Exibe essa string em uma nova janela rolável.
 
     Lembrete: Imagine que você está colocando todos os crachás de participantes em ordem
